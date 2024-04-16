@@ -51,41 +51,18 @@
 // export default App;
 
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteUser } from "./store/reducers/UserReducer";
+import Users from "./components/Users";
+import { Link, Outlet } from "react-router-dom";
+import Navbar from "./components/Navbar";
 
 function App() {
-    const { users } = useSelector((state) => state.UserReducer);
-    const dispatch = useDispatch();
-
-    const deleteHandler = (index) => {
-        dispatch(deleteUser(index));
-    };
-
     return (
-        <div className="m-auto container p-8 mt-5 bg-red-100">
-            <h1 className="font-mono text-center text-3xl font-bold text-red-900">
-                User List
-            </h1>
-            <ul className="mt-5">
-                {users.map((user, index) => {
-                    return (
-                        <li
-                            className="p-3 bg-red-300 text-white hover:text-black w-1/2 text-center mb-2 rounded flex items-center justify-between"
-                            key={index}
-                        >
-                            {user.name}
-                            <span
-                                onClick={() => deleteHandler(user.index)}
-                                className="text-white p-2 rounded bg-red-500 hover:bg-red-800 cursor-pointer"
-                            >
-                                X
-                            </span>
-                        </li>
-                    );
-                })}
-            </ul>
-        </div>
+        <>
+            <div className="w-screen h-fit pb-5">
+                <Navbar />
+                <Outlet />
+            </div>
+        </>
     );
 }
 
